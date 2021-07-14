@@ -28,7 +28,7 @@ public class IntegerAddDecoderTest {
         for (int i = 0; i < 100; i++) {
             ByteBuf buffer = Unpooled.buffer();
             buffer.writeInt(i);
-            channel.writeAndFlush(buffer);
+            channel.writeInbound(buffer);
         }
         try {
             Thread.sleep(Integer.MAX_VALUE);

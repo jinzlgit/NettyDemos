@@ -6,12 +6,11 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.embedded.EmbeddedChannel;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class IntegerAddDecoderTest {
 
     @Test
-    public void test() {
+    public void testByte2IntegerReplayDecoder() {
         EmbeddedChannel channel = new EmbeddedChannel(new ChannelInitializer<EmbeddedChannel>() {
             @Override
             protected void initChannel(EmbeddedChannel ec) throws Exception {
@@ -23,7 +22,7 @@ public class IntegerAddDecoderTest {
         for (int i = 0; i < 100; i++) {
             ByteBuf buffer = Unpooled.buffer();
             buffer.writeInt(i);
-            channel.writeAndFlush(buffer);
+            channel.writeInbound(buffer);
         }
         try {
             Thread.sleep(Integer.MAX_VALUE);
