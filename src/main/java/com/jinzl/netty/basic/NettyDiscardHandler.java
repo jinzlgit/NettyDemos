@@ -1,12 +1,9 @@
 package com.jinzl.netty.basic;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
-import io.netty.util.concurrent.EventExecutorGroup;
 
 /**
  * 业务处理器
