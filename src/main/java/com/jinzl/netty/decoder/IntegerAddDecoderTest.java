@@ -4,27 +4,31 @@ import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.embedded.EmbeddedChannel;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static org.junit.jupiter.api.Assertions.*;
+/**
+ * @author Zhenlin Jin
+ * @date 2021/7/14 16:29
+ */
+public class IntegerAddDecoderTest {
 
-// @SpringBootTest
-public class IntegerProcessHandlerTest {
     @Test
-    public void testByteToIntegerDecoder() {
-        ChannelInitializer<EmbeddedChannel> initializer = new ChannelInitializer<EmbeddedChannel>() {
+    public void testByte2IntegerReplayDecoder() {
+        EmbeddedChannel channel = new EmbeddedChannel(new ChannelInitializer<EmbeddedChannel>() {
             @Override
             protected void initChannel(EmbeddedChannel ec) throws Exception {
-                ec.pipeline().addLast(new Byte2IntegerDecoder());
-                ec.pipeline().addLast(new IntegerProcessHandler());
+                ec.pipeline()
+                        .addLast(new IntegerAddDecoder())
+                        .addLast(new IntegerProcessHandler());
             }
-        };
-        EmbeddedChannel emChannel = new EmbeddedChannel(initializer);
+        });
         for (int i = 0; i < 100; i++) {
             ByteBuf buffer = Unpooled.buffer();
             buffer.writeInt(i);
-            emChannel.writeAndFlush(buffer);
+            channel.writeAndFlush(buffer);
         }
         try {
             Thread.sleep(Integer.MAX_VALUE);
