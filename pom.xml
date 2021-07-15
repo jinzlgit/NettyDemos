@@ -53,6 +53,37 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.5.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                <!--    proto文件路径-->
+                    <protoSourceRoot>${project.basedir}/protobuf</protoSourceRoot>
+                    <!--目标路径-->
+                    <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+                    <clearOutputDirectory>false</clearOutputDirectory>
+                <!--    临时目录-->
+                    <temporaryProtoFileDirectory>
+                        ${project.build.sourceDirectory}/proto-temp
+                    </temporaryProtoFileDirectory>
+                <!--    可执行文件路径-->
+                    <protocExecutable>
+                        ${project.basedir}/protobuf/protoc3.6.1.exe
+                    </protocExecutable>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
