@@ -17,7 +17,7 @@ public class Byte2IntegerReplayDecoderTester {
     public void testByte2IntegerReplayDecoder() {
         ChannelInitializer i = new ChannelInitializer<EmbeddedChannel>() {
             protected void initChannel(EmbeddedChannel ch) {
-                ch.pipeline().addLast(new IntegerAddDecoder());
+                ch.pipeline().addLast(new IntegerReplayDecoder());
                 ch.pipeline().addLast(new IntegerProcessHandler());
             }
         };

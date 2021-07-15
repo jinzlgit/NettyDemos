@@ -5,9 +5,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.embedded.EmbeddedChannel;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Zhenlin Jin
@@ -21,7 +18,7 @@ public class IntegerAddDecoderTest {
             @Override
             protected void initChannel(EmbeddedChannel ec) throws Exception {
                 ec.pipeline()
-                        .addLast(new IntegerAddDecoder())
+                        .addLast(new IntegerReplayDecoder())
                         .addLast(new IntegerProcessHandler());
             }
         });

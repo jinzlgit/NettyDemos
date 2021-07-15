@@ -1,7 +1,6 @@
 package com.jinzl.netty.decoder;
 
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ReplayingDecoder;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * @author Zhenlin Jin
  * @date 2021/7/14 15:57
  */
-public class IntegerAddDecoder extends ReplayingDecoder<IntegerAddDecoder.Status> {
+public class IntegerReplayDecoder extends ReplayingDecoder<IntegerReplayDecoder.Status> {
 
     enum Status {
         PARSE_1, PARSE_2;
@@ -22,7 +21,7 @@ public class IntegerAddDecoder extends ReplayingDecoder<IntegerAddDecoder.Status
     private int first;
     private int second;
 
-    public IntegerAddDecoder() {
+    public IntegerReplayDecoder() {
         // 在构造器函数中，需要初始化父类的state属性，表示当前阶段
         super(Status.PARSE_1);
     }

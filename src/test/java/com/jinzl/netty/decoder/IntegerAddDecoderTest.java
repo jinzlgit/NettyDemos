@@ -15,7 +15,7 @@ public class IntegerAddDecoderTest {
             @Override
             protected void initChannel(EmbeddedChannel ec) throws Exception {
                 ec.pipeline()
-                        .addLast(new IntegerAddDecoder())
+                        .addLast(new IntegerReplayDecoder())
                         .addLast(new IntegerProcessHandler());
             }
         });
